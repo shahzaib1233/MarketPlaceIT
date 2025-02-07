@@ -28,8 +28,8 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       line_items: lineItems, // Pass the dynamically created line items
       mode: "payment",
-      success_url: "http://localhost:3000/",
-      cancel_url: "http://localhost:3000/cart",
+      success_url: "https://market-place-it.vercel.app/",
+      cancel_url: "https://market-place-it.vercel.app/",
     });
 
     return NextResponse.json({ url: session.url }, { status: 200 });
