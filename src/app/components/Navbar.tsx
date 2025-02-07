@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from "react";
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { AiOutlineShoppingCart, AiOutlineMenu, AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,7 +9,6 @@ const Navbar: React.FC = () => {
   const [cartCount] = useState(0); // Track the number of items in the cart
 
   return (
-    <ClerkProvider>
       <nav className="w-full mx-auto text-white">
         {/* First Div (Top Section) */}
         <div className="bg-[#2C2544] flex justify-between items-center p-2">
@@ -73,18 +71,13 @@ const Navbar: React.FC = () => {
             </Link>
 
             {/* SignedIn and SignedOut */}
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <SignInButton>
+           
                 <button
                   className="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 transition mr-5"
                 >
                   Log In
                 </button>
-              </SignInButton>
-            </SignedOut>
+            
           </div>
         </div>
 
@@ -109,25 +102,19 @@ const Navbar: React.FC = () => {
               <Link href="/faq" className="hover:text-blue-700">FAQ</Link>
               <Link href="/contact" className="hover:text-blue-700">Contact</Link>
               {/* SignedIn and SignedOut for Mobile */}
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-              <SignedOut>
-                <SignInButton>
+              
                   <button
                     className="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600 transition mr-5"
                   >
                     Log In
                   </button>
-                </SignInButton>
-              </SignedOut>
+                
             </div>
           </div>
         )}
 
         <hr className="border-t border-gray-300 mt-4" />
       </nav>
-    </ClerkProvider>
   );
 };
 

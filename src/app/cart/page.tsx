@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { MdOutlineDelete } from "react-icons/md";
-import { useUser } from '@clerk/nextjs'; // Clerk authentication
-
 
 // Cart Item Type Definition
 interface CartItem {
@@ -17,7 +15,6 @@ const CartPage: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
-  const { isSignedIn } = useUser(); // Clerk user authentication
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -41,19 +38,14 @@ const CartPage: React.FC = () => {
   }, [total]);
 
   const handleProceedToCheckout = () => {
-    if (!isSignedIn) {
-      setErrorMessage("You must log in to access checkout page.");
-      return;
-    }
-    
     if (cartItems.length === 0) {
       setErrorMessage('Your cart is empty!');
       return;
     }
-
-    setErrorMessage('');
     
-    // Navigate to the delivery page if all conditions are met
+    setErrorMessage(''); // Clear any existing error message
+    
+    // Navigate to the delivery page
     router.push('/delivery');
   };
 
